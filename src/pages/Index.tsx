@@ -4,6 +4,7 @@ import WhoSection from '@/components/WhoSection';
 import ProblemSection from '@/components/ProblemSection';
 import SolutionSection from '@/components/SolutionSection';
 import FeatureGrid from '@/components/FeatureGrid';
+import StandsDownSection from '@/components/StandsDownSection';
 import TrustSection from '@/components/TrustSection';
 import CTASection from '@/components/CTASection';
 import Footer from '@/components/Footer';
@@ -17,6 +18,7 @@ const Index = () => {
       <ProblemSection />
       <SolutionSection />
       <FeatureGrid />
+      <StandsDownSection />
       <TrustSection />
       <CTASection />
       <Footer />

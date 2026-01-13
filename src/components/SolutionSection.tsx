@@ -1,4 +1,6 @@
 import { Database, Eye, CheckCircle, Shield, Zap } from 'lucide-react';
+import { motion } from 'framer-motion';
+import ScrollReveal from './ScrollReveal';
 
 const steps = [
   {
@@ -35,53 +37,77 @@ const steps = [
 
 const SolutionSection = () => {
   return (
-    <section className="section-transition bg-background">
-      <div className="container-wide">
+    <section className="section-transition relative overflow-hidden bg-background">
+      {/* Subtle gradient overlay */}
+      <div 
+        className="absolute inset-0 opacity-50"
+        style={{
+          background: 'radial-gradient(ellipse 100% 60% at 50% 0%, hsl(200 30% 95%), transparent 60%)'
+        }}
+      />
+
+      <div className="container-wide relative z-10">
         {/* Section header */}
-        <div className="text-center mb-12 md:mb-20">
-          <span className="label-badge">How it works</span>
-          <h2 className="headline-section mt-4 text-headline max-w-2xl mx-auto">
-            From market data to decision, with structure at every step
-          </h2>
-        </div>
+        <ScrollReveal>
+          <div className="text-center mb-12 md:mb-20">
+            <span className="label-badge">How it works</span>
+            <h2 className="headline-section mt-4 text-headline max-w-2xl mx-auto">
+              From market data to decision, with <span className="text-accent-highlight">structure</span> at every step
+            </h2>
+          </div>
+        </ScrollReveal>
 
         {/* Steps */}
         <div className="max-w-3xl mx-auto">
           <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute left-4 top-0 bottom-0 w-px bg-border hidden md:block" />
+            {/* Animated vertical line */}
+            <motion.div 
+              className="absolute left-4 top-0 bottom-0 w-px hidden md:block origin-top"
+              style={{ background: 'linear-gradient(180deg, hsl(var(--primary)), hsl(var(--accent-highlight)), hsl(var(--primary) / 0.3))' }}
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.5, ease: 'easeOut' }}
+            />
 
             <div className="space-y-8 md:space-y-12">
               {steps.map((step, index) => (
-                <div
-                  key={step.number}
-                  className="relative flex gap-6 md:gap-8 items-start"
-                  style={{
-                    opacity: 0,
-                    animation: 'fade-in 0.5s ease-out forwards',
-                    animationDelay: `${index * 0.1}s`,
-                  }}
-                >
-                  {/* Step number */}
-                  <div className="flex-shrink-0 z-10">
-                    <div className="step-number">
-                      {step.number}
+                <ScrollReveal key={step.number} delay={index * 0.1}>
+                  <motion.div
+                    className="relative flex gap-6 md:gap-8 items-start group"
+                    whileInView={{ scale: 1 }}
+                    initial={{ scale: 0.96 }}
+                    viewport={{ once: true, margin: '-100px' }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                  >
+                    {/* Step number with glow */}
+                    <div className="flex-shrink-0 z-10 relative">
+                      {/* Glow effect */}
+                      <div 
+                        className="absolute inset-0 rounded-full blur-lg opacity-0 group-hover:opacity-40 transition-opacity duration-500"
+                        style={{ background: 'hsl(var(--primary))' }}
+                      />
+                      <div className="step-number relative">
+                        {step.number}
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Content */}
-                  <div className="flex-1 pb-8 md:pb-0">
-                    <div className="flex items-center gap-3 mb-2">
-                      <step.icon className="w-5 h-5 text-primary" />
-                      <h3 className="text-lg font-semibold text-headline">
-                        {step.label}
-                      </h3>
+                    {/* Content card */}
+                    <div className="flex-1 pb-8 md:pb-0">
+                      <div className="p-5 rounded-lg bg-card/50 border border-border/50 backdrop-blur-sm group-hover:bg-card/80 group-hover:border-primary/20 transition-all duration-300">
+                        <div className="flex items-center gap-3 mb-2">
+                          <step.icon className="w-5 h-5 text-primary" />
+                          <h3 className="text-lg font-semibold text-headline">
+                            {step.label}
+                          </h3>
+                        </div>
+                        <p className="body-default">
+                          {step.description}
+                        </p>
+                      </div>
                     </div>
-                    <p className="body-default">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
+                  </motion.div>
+                </ScrollReveal>
               ))}
             </div>
           </div>
