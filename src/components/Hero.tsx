@@ -1,6 +1,15 @@
 import { ArrowRight } from 'lucide-react';
+import WaitlistDialog from './WaitlistDialog';
 
 const Hero = () => {
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative hero-gradient min-h-screen flex items-center overflow-hidden">
       {/* Radial gradient overlay */}
@@ -48,11 +57,17 @@ const Hero = () => {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up"
             style={{ animationDelay: '0.3s' }}
           >
-            <a href="#explore" className="btn-hero-primary group">
-              Explore the platform
-              <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </a>
-            <a href="#how-it-works" className="btn-hero-secondary">
+            <WaitlistDialog>
+              <button className="btn-hero-primary group">
+                Join Waitlist
+                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </button>
+            </WaitlistDialog>
+            <a 
+              href="#solution" 
+              onClick={(e) => scrollToSection(e, '#solution')}
+              className="btn-hero-secondary"
+            >
               Learn how it works
             </a>
           </div>

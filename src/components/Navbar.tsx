@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import WaitlistDialog from './WaitlistDialog';
 
 const navLinks = [
-  { label: 'Product', href: '#product' },
-  { label: 'Solutions', href: '#solutions' },
-  { label: 'Use Cases', href: '#use-cases' },
-  { label: 'Enterprise', href: '#enterprise' },
-  { label: 'Resources', href: '#resources' },
+  { label: 'How It Works', href: '#solution' },
+  { label: 'Features', href: '#features' },
+  { label: 'Philosophy', href: '#philosophy' },
 ];
 
 interface NavbarProps {
@@ -26,6 +25,15 @@ const Navbar = ({ variant = 'dark' }: NavbarProps) => {
   }, []);
 
   const isDark = variant === 'dark' && !isScrolled;
+
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <nav
@@ -54,6 +62,7 @@ const Navbar = ({ variant = 'dark' }: NavbarProps) => {
               <a
                 key={link.label}
                 href={link.href}
+                onClick={(e) => scrollToSection(e, link.href)}
                 className={isDark ? 'nav-link-hero' : 'nav-link'}
               >
                 {link.label}
@@ -63,24 +72,17 @@ const Navbar = ({ variant = 'dark' }: NavbarProps) => {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-4">
-            <a
-              href="#login"
-              className={`text-sm font-medium transition-colors ${
-                isDark ? 'text-white/80 hover:text-white' : 'text-body hover:text-headline'
-              }`}
-            >
-              Log in
-            </a>
-            <a
-              href="#contact"
-              className={`text-sm font-medium px-4 py-2 rounded-md border transition-all duration-200 ${
-                isDark
-                  ? 'border-white/20 text-white hover:bg-white/10'
-                  : 'border-border text-headline hover:bg-muted'
-              }`}
-            >
-              Talk to Sales
-            </a>
+            <WaitlistDialog>
+              <button
+                className={`text-sm font-medium px-4 py-2 rounded-md border transition-all duration-200 ${
+                  isDark
+                    ? 'border-white/20 text-white hover:bg-white/10'
+                    : 'border-border text-headline hover:bg-muted'
+                }`}
+              >
+                Join Waitlist
+              </button>
+            </WaitlistDialog>
           </div>
 
           {/* Mobile Menu Button */}
@@ -102,18 +104,17 @@ const Navbar = ({ variant = 'dark' }: NavbarProps) => {
                 key={link.label}
                 href={link.href}
                 className="block nav-link py-2"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => scrollToSection(e, link.href)}
               >
                 {link.label}
               </a>
             ))}
-            <div className="pt-4 border-t border-border space-y-3">
-              <a href="#login" className="block text-sm font-medium text-body">
-                Log in
-              </a>
-              <a href="#contact" className="btn-secondary w-full text-center">
-                Talk to Sales
-              </a>
+            <div className="pt-4 border-t border-border">
+              <WaitlistDialog>
+                <button className="btn-secondary w-full text-center">
+                  Join Waitlist
+                </button>
+              </WaitlistDialog>
             </div>
           </div>
         </div>

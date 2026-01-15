@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
+import WaitlistDialog from './WaitlistDialog';
 
 const CTASection = () => {
   return (
@@ -48,30 +49,22 @@ const CTASection = () => {
 
         <ScrollReveal delay={0.1}>
           <p className="text-lg text-white/60 mb-10 max-w-xl mx-auto">
-            Explore how IntellHub approaches market analysis, regime detection, 
-            and risk-first decision making.
+            Join the waitlist to get early access when we launch. Be among the first to experience regime-aware trading intelligence.
           </p>
         </ScrollReveal>
 
         <ScrollReveal delay={0.2}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <motion.a 
-              href="#explore" 
-              className="btn-hero-primary group"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Explore the platform
-              <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </motion.a>
-            <motion.a 
-              href="#contact" 
-              className="btn-hero-secondary"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Talk to our team
-            </motion.a>
+            <WaitlistDialog>
+              <motion.button 
+                className="btn-hero-primary group"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Join Waitlist
+                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </motion.button>
+            </WaitlistDialog>
           </div>
         </ScrollReveal>
 

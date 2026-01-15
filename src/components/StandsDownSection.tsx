@@ -9,7 +9,7 @@ const statements = [
 
 const StandsDownSection = () => {
   return (
-    <section className="section-transition relative overflow-hidden">
+    <section id="philosophy" className="section-transition relative overflow-hidden">
       {/* Dark gradient background */}
       <div 
         className="absolute inset-0"
