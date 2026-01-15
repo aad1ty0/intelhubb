@@ -55,7 +55,7 @@ const features = [
 
 const FeatureGrid = () => {
   return (
-    <section className="section-transition relative overflow-hidden">
+    <section id="features" className="section-transition relative overflow-hidden">
       {/* Gradient background */}
       <div 
         className="absolute inset-0"

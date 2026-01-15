@@ -37,7 +37,7 @@ const steps = [
 
 const SolutionSection = () => {
   return (
-    <section className="section-transition relative overflow-hidden bg-background">
+    <section id="solution" className="section-transition relative overflow-hidden bg-background">
       {/* Subtle gradient overlay */}
       <div 
         className="absolute inset-0 opacity-50"
